@@ -1,6 +1,7 @@
 package com.adventofcode.aoc2025.day2
 
 class RangeParser {
+
     fun parse(string: String): LongRange {
 
         val numbers = string.split("-")
