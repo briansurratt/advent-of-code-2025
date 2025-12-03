@@ -11,10 +11,7 @@ class Day1 {
 
         val dataSource = DataSource()
 
-//        val input = object {}.javaClass.getResourceAsStream("/day1/sample-data.txt")!!
-        val input = object {}.javaClass.getResourceAsStream("/day1/input.txt")!!
-
-        val fileContents = dataSource.load(input)
+        val fileContents = dataSource.load("/day1/input.txt")
 
         val dataProcessor = DataProcessor()
         val turns = dataProcessor.process(fileContents)

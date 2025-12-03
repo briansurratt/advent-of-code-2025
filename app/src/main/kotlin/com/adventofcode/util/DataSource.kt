@@ -27,6 +27,11 @@ class DataSource() {
 
     }
 
+    fun load(resourcePath: String) : String {
+        val inputStream = object {}.javaClass.getResourceAsStream(resourcePath)!!
+        return load((inputStream))
+    }
+
     fun load(inputStream: InputStream) : String {
         val bis = BufferedInputStream(inputStream)
         val string = bis.bufferedReader().use { it.readText() }
