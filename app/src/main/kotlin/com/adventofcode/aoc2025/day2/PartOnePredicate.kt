@@ -3,7 +3,7 @@ package com.adventofcode.aoc2025.day2
 import java.util.function.Predicate
 
 
-class RepeatingNumberPredicate : Predicate<Long> {
+class PartOnePredicate : Predicate<Long> {
 
     fun Int.isEven() : Boolean {
         return this % 2 == 0

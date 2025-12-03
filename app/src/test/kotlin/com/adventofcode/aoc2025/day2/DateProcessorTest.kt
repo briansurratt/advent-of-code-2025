@@ -13,8 +13,8 @@ class DateProcessorTest {
         val ranges = dataProcessor.process("11-22,95-115")
 
         assertEquals(2, ranges.size)
-        assertEquals(11.rangeTo(22), ranges[0])
-        assertEquals(95.rangeTo(115), ranges[1])
+        assertEquals(11L.rangeTo(22L), ranges[0])
+        assertEquals(95L.rangeTo(115L), ranges[1])
 
     }
     

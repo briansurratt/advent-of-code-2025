@@ -1,8 +1,8 @@
 package com.adventofcode.aoc2025.day2
 
-class RangeProcessor {
+import java.util.function.Predicate
 
-    private val predicate = RepeatingNumberPredicate()
+class RangeProcessor(private val predicate : Predicate<Long>){
 
     fun process(range: LongRange) : Long {
 

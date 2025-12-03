@@ -13,8 +13,8 @@ class RangeParserTest {
     @Test
     fun simpleScenario() {
 
-        val expected: IntRange = 1.rangeTo(5)
-        val actual : IntRange = rangeParser.parse("1-5")
+        val expected: LongRange = 1L.rangeTo(5L)
+        val actual : LongRange = rangeParser.parse("1-5")
 
         assertEquals(expected, actual)
 
