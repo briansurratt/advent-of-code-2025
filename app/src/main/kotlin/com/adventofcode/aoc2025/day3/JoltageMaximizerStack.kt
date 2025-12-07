@@ -2,7 +2,13 @@ package com.adventofcode.aoc2025.day3
 
 import kotlin.math.min
 
-class JoltageMaximizer(private val bank: Bank, private  val batteriesToTurnOn: Int) {
+class JoltageMaximizerStack(private val bank: Bank, private  val batteriesToTurnOn: Int) {
+
+    val stack = ArrayDeque(emptyList<Int>())
+
+
+
+
 
     val bankSize = bank.size()
     var windowSize : Int = 0
@@ -17,24 +23,6 @@ class JoltageMaximizer(private val bank: Bank, private  val batteriesToTurnOn: I
 
         processRight(0..windowSize)
 
-
-
-        println(keepers)
-
-        fillIn()
-
-        println(keepers)
-//        processLeft(minIndex + 1..maxIndex)
-
-        val indexes  = keepers.map { reference -> reference.index }
-        val mask = buildMask(indexes, bankSize)
-
-        bank.applyMask(mask)
-
-    }
-
-    private fun fillIn() {
-
         val maxIndex = keepers.maxOf { it.index }
         val minIndex = keepers.minOf { it.index }
         val minValue = keepers.minOf { it.value }
@@ -43,27 +31,21 @@ class JoltageMaximizer(private val bank: Bank, private  val batteriesToTurnOn: I
         println("maxIndex = $maxIndex")
         println("minValue = $minValue")
 
-        val take = joltages.subList(minIndex, maxIndex)
-        println("JoltageMaximizer.fillIn")
-        println("take = ${take}")
+        println(keepers)
 
-        val maxInWindow = joltages.maxInWindow(minIndex..maxIndex)
-        println("maxInWindow = ${maxInWindow}")
-        val i = maxInWindow.index
-        keepers.add(maxInWindow)
+        processLeft(minIndex + 1..maxIndex)
+
+        val indexes  = keepers.map { reference -> reference.index }
+        val mask = buildMask(indexes, bankSize)
+
+        bank.applyMask(mask)
 
     }
 
     private fun processLeft(range: IntRange) {
 
-        println("JoltageMaximizer.processLeft ($range)")
-
-        if (range.first == range.last) {
-            return
-        }
-
         val subList = joltages.subList(range.first, range.last)
-        val maxInWindow = joltages.maxInWindow(range)
+        val maxInWindow = subList.maxInWindow(range)
 
         val smallestJoltage = keepers.minOf { batteryReference -> batteryReference.value }
 

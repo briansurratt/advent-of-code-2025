@@ -12,9 +12,31 @@ class JoltageMaximizerTest {
     private val lineParser = LineParser()
 
 
-    @ParameterizedTest
-    @MethodSource("testParameters")
-    fun test(line : String, expected: Long) {
+    @ParameterizedTest(name = "Two Battery Test")
+    @MethodSource("TwoBatteryTest")
+    fun twoBatteryTest(line : String, expected: Long) {
+
+        val sequence = lineParser.parse(line)
+        val bank = Bank()
+
+        sequence.forEach { i -> bank.addBatteryWithJoltage(i) }
+
+        val maximizer = JoltageMaximizer(bank, 2)
+        maximizer.run()
+
+        val actual = bank.calculateJoltage()
+
+        println("JoltageMaximizerTest.twoBatteryTest")
+        println("   $expected")
+        println("   $actual")
+
+        assertEquals(expected, actual)
+
+    }
+
+    @ParameterizedTest(name = "Twelve Battery Test")
+    @MethodSource("TwelveBatteryTest")
+    fun twelveBatteryTest(line : String, expected: Long) {
 
         val sequence = lineParser.parse(line)
         val bank = Bank()
@@ -24,14 +46,20 @@ class JoltageMaximizerTest {
         val maximizer = JoltageMaximizer(bank, 12)
         maximizer.run()
 
-        assertEquals(expected, bank.calculateJoltage() )
+        val actual = bank.calculateJoltage()
+
+        println("JoltageMaximizerTest.twelveBatteryTest")
+        println("   $expected")
+        println("   $actual")
+
+        assertEquals(expected, actual )
 
     }
 
 
     companion object {
         @JvmStatic
-        fun testParameters() : Stream<Arguments> {
+        fun TwoBatteryTest() : Stream<Arguments> {
 
             return Stream.of(
                 arguments("987654321111111", 98L),
@@ -41,6 +69,19 @@ class JoltageMaximizerTest {
             )
 
         }
+
+        @JvmStatic
+        fun TwelveBatteryTest() : Stream<Arguments> {
+
+            return Stream.of(
+                arguments("987654321111111", 987654321111L),
+                arguments("811111111111119", 811111111119L),
+                arguments("234234234234278", 434234234278L),
+                arguments("818181911112111", 888911112111L)
+            )
+
+        }
+
     }
 
 }
