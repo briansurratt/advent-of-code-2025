@@ -35,7 +35,7 @@ class Worksheet {
 
     }
 
-    private fun addNumbers(numbers: List<Long>) {
+    private fun addNumbers(numbers: List<String>) {
 
         if (problems.size == 0) {
             for (i in 1..numbers.size) {
