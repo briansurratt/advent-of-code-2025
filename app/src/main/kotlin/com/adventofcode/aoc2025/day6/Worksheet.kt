@@ -1,9 +1,8 @@
 package com.adventofcode.aoc2025.day6
 
-class Worksheet {
+class Worksheet(val problems: List<Problem>) {
 
     private val lineParser = LineParser()
-    private val problems = mutableListOf<Problem>()
 
     enum class LineType {
         numbers, operators
@@ -23,8 +22,7 @@ class Worksheet {
 
         when (lineType) {
             LineType.operators -> {
-                val operators = lineParser.parseOperators(newLine)
-                addOperators(operators)
+             // can discard this now
             }
 
             LineType.numbers -> {
@@ -37,28 +35,22 @@ class Worksheet {
 
     private fun addNumbers(numbers: List<String>) {
 
-        if (problems.size == 0) {
-            for (i in 1..numbers.size) {
-                problems.add(Problem())
-            }
-        }
-
         for (i in 0..<problems.size) {
             problems[i].addNumber(numbers[i])
         }
 
     }
 
-    private fun addOperators(operators: List<Problem.Operator>) {
-        for (i in 0..<problems.size) {
-            problems[i].setOperator(operators[i])
-        }
-    }
+
 
     fun calculateGrandTotal(): Long {
 
         return problems.sumOf { problem -> problem.solve() }
 
+    }
+
+    fun solvePart2(): Long {
+        TODO("Not yet implemented")
     }
 
 }

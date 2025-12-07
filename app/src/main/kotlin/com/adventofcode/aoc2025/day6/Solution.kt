@@ -7,9 +7,14 @@ class Solution {
     fun run(type: DataSource.Type) {
 
         val data = DataSource().load(6, type)
-        val worksheet = Worksheet()
 
         val lines = data.lines()
+
+        val problemBuilder = ProblemBuilder()
+        val problems = problemBuilder.processOperatorLiner(lines.last())
+
+        val worksheet = Worksheet(problems)
+
         lines.forEach { line ->
             worksheet.addLine(line)
         }
@@ -17,10 +22,11 @@ class Solution {
         val grandTotal : Long = worksheet.calculateGrandTotal()
         println("grandTotal = ${grandTotal}")
 
+
+        val grandTotal2 : Long =worksheet.solvePart2()
     }
 
 }
-
 
 fun main() {
     Solution().run(DataSource.Type.puzzle)
