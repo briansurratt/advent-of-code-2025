@@ -38,4 +38,15 @@ class DataSource() {
         return string
     }
 
+    fun load (day : Int,type : Type) : String {
+        val resourcePath = "/day$day/${type.name}.txt"
+//            /day5/sample.txt
+        println("resourcePath = ${resourcePath}")
+        return load(resourcePath)
+    }
+
+    enum class Type {
+        sample, puzzle
+    }
+
 }
