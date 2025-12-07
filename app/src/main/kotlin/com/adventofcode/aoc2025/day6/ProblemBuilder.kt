@@ -24,7 +24,7 @@ class ProblemBuilder {
                     while (chars[0] == ' ') {
                         spaces++
                         chars.removeFirst()
-                        println("[$chars]")
+
                     }
 
                     val operator = Problem.Operator.encode(previousOperator)
@@ -32,8 +32,6 @@ class ProblemBuilder {
 
                 }
             }
-
-            println("[$chars]")
 
         }
 

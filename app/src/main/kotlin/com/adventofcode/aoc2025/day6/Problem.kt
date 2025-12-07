@@ -1,7 +1,5 @@
 package com.adventofcode.aoc2025.day6
 
-import kotlin.properties.Delegates
-
 data class Problem(val width: Int = 0, private val operator: Operator) {
 
     private val numbers = mutableListOf<String>()
@@ -23,17 +21,31 @@ data class Problem(val width: Int = 0, private val operator: Operator) {
     }
 
     fun addNumber(number: String) {
+        println("number = [${number}]")
         numbers.add(number)
     }
 
     fun solve(): Long {
 
+        println("Problem.solve")
+
+        println(numbers)
+
+        val longValues= numbers.map { it.trim() }.filterNot { it.isEmpty() }.map { it.toLong() }
+
+        println("*******************")
+        println(longValues)
+        println(operator)
+        println("*******************")
+
+
+
         val solution = when (operator) {
-            Operator.multiplication -> numbers.map { it.toLong() }.fold(1L) { accumulator, element ->
+            Operator.multiplication -> longValues.fold(1L) { accumulator, element ->
                 accumulator * element
             }
 
-            Operator.addition -> numbers.sumOf { it.toLong() }
+            Operator.addition -> longValues.sum()
         }
 
         return solution
@@ -42,12 +54,20 @@ data class Problem(val width: Int = 0, private val operator: Operator) {
 
     fun solveV2(): Long {
 
-        // map back to String
-        // pivot columns to rows
-        // map back to Long
-        // performOperation
+        val pivoter = NumberSeriesPivoter(width)
+        val newNumbers = pivoter.process(numbers)
 
-        return 0L
+        val solution = when (operator) {
+            Operator.multiplication -> newNumbers.fold(1L) { accumulator, element ->
+                accumulator * element
+            }
+
+            Operator.addition -> newNumbers.sumOf { it.toLong() }
+        }
+
+        return solution
+
+
 
     }
 

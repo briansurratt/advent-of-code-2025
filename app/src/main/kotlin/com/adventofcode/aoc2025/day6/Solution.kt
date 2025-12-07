@@ -23,7 +23,7 @@ class Solution {
         println("grandTotal = ${grandTotal}")
 
 
-        val grandTotal2 : Long =worksheet.solvePart2()
+//        val grandTotal2 : Long =worksheet.solvePart2()
     }
 
 }

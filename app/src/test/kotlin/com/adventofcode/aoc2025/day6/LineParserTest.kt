@@ -17,7 +17,7 @@ class LineParserTest {
         val lineParser = LineParser()
         val actual : List<String> = lineParser.parseNumbers(line)
 
-        assertEquals(expected.map { it.toLong() }, actual)
+        assertEquals(expected.map { it.toString() }, actual)
 
     }
 

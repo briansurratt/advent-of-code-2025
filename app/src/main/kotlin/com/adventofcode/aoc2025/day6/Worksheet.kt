@@ -1,13 +1,20 @@
 package com.adventofcode.aoc2025.day6
 
+import com.sun.tools.javac.jvm.PoolConstant.LoadableConstant.String
+
 class Worksheet(val problems: List<Problem>) {
 
     private val lineParser = LineParser()
+    val widths = problems.map { it.width }
 
     enum class LineType {
         numbers, operators
     }
 
+    init {
+        println("Worksheet.init")
+        println("widths = ${widths}")
+    }
 
     fun addLine(newLine: String) {
 
@@ -26,8 +33,16 @@ class Worksheet(val problems: List<Problem>) {
             }
 
             LineType.numbers -> {
-                val numbers = lineParser.parseNumbers(newLine)
-                addNumbers(numbers)
+
+
+                val parser = WidthBasedParser(widths)
+                val values = parser.line(newLine)
+
+                for (i in 0..<values.size) {
+                    problems[i].addNumber(values[i])
+                }
+
+
             }
         }
 
@@ -44,13 +59,18 @@ class Worksheet(val problems: List<Problem>) {
 
 
     fun calculateGrandTotal(): Long {
+        val longs = problems.map { problem ->
+            problem.solve()
+        }
 
-        return problems.sumOf { problem -> problem.solve() }
-
+        println("solutions: ${longs}")
+        
+        return longs.sum()
+        
     }
 
     fun solvePart2(): Long {
-        TODO("Not yet implemented")
+        return problems.sumOf { problem -> problem.solveV2() }
     }
 
 }
