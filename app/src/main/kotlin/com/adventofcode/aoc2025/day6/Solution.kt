@@ -19,11 +19,12 @@ class Solution {
             worksheet.addLine(line)
         }
 
-        val grandTotal : Long = worksheet.calculateGrandTotal()
-        println("grandTotal = ${grandTotal}")
+//        val grandTotal : Long = worksheet.calculateGrandTotal()
+//        println("grandTotal = ${grandTotal}")
 
 
-//        val grandTotal2 : Long =worksheet.solvePart2()
+        val grandTotal2 : Long =worksheet.solvePart2()
+        println("grandTotal2 = ${grandTotal2}")
     }
 
 }

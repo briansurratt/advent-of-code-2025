@@ -2,7 +2,11 @@ package com.adventofcode.aoc2025.day6
 
 class NumberSeriesPivoter(private val width: Int) {
 
-
+    init {
+        println("NumberSeriesPivoter.init")
+        println("width = ${width}")
+    }
+    
     fun process(numbers: List<String>): List<Long> {
 
         numbers.forEach { println("[$it]") }

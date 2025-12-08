@@ -54,6 +54,11 @@ data class Problem(val width: Int = 0, private val operator: Operator) {
 
     fun solveV2(): Long {
 
+        println("Problem.solveV2")
+        numbers.forEach { s ->
+            println("   [$s]")
+        }
+        
         val pivoter = NumberSeriesPivoter(width)
         val newNumbers = pivoter.process(numbers)
 
